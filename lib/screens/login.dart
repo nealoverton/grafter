@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:graftr/services/auth.dart';
+import 'package:grafter/services/auth.dart';
 
 class LogIn extends StatefulWidget {
   final Function toggleAuthScreen;
