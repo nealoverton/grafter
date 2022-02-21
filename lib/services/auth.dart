@@ -21,4 +21,16 @@ class AuthService {
   AppUser? _userFromFirebaseUser(User? user) {
     return user != null ? AppUser(uid: user.uid) : null;
   }
+
+  Future signInWithEmailAndPassword(String email, String password) async {
+    try {
+      UserCredential result = await _auth.signInWithEmailAndPassword(
+          email: email.trim(), password: password.trim());
+      User? user = result.user;
+      return _userFromFirebaseUser(user);
+    } catch (e) {
+      print(e);
+      return null;
+    }
+  }
 }
