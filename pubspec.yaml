@@ -1,4 +1,4 @@
-name: graftr
+name: grafter
 description: A new Flutter project.
 
 # The following line prevents the package from being accidentally published to
@@ -36,6 +36,7 @@ dependencies:
   firebase_auth: ^3.3.7
   cloud_firestore: ^3.1.8
   firebase_core: ^1.10.2
+  provider: ^6.0.2
 
 dev_dependencies:
   flutter_test:
