@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:graftr/services/auth.dart';
 
 class Register extends StatefulWidget {
   const Register({Key? key}) : super(key: key);
@@ -8,7 +9,9 @@ class Register extends StatefulWidget {
 }
 
 class _RegisterState extends State<Register> {
+  final AuthService _auth = AuthService();
   final _formKey = GlobalKey<FormState>();
+  bool loading = false;
 
   String email = '';
   String password = '';
@@ -24,7 +27,7 @@ class _RegisterState extends State<Register> {
         padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 50.0),
         alignment: Alignment.center,
         child: Form(
-          // key: _formKey,
+          key: _formKey,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: <Widget>[
@@ -44,7 +47,24 @@ class _RegisterState extends State<Register> {
                 obscureText: true,
                 onChanged: (value) => {setState(() => password = value)},
               ),
-              ElevatedButton(onPressed: () => {}, child: Text('Register')),
+              ElevatedButton(
+                  onPressed: () async {
+                    if (_formKey.currentState!.validate()) {
+                      setState(() {
+                        loading = true;
+                      });
+                      dynamic result = await _auth.registerWithEmailAndPassword(
+                          email, password);
+                      if (result == null) {
+                        setState(() {
+                          error = 'please provide a valid email';
+                          loading = false;
+                        });
+                      }
+                    }
+                  },
+                  child: Text('Register')),
+              Text(error, style: TextStyle(color: Colors.red)),
               SizedBox(height: 20.0),
               Text('Already have an account? Log in here:'),
               ElevatedButton(onPressed: () => {}, child: Text('Log in')),
