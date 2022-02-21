@@ -1,14 +1,10 @@
- 
 import 'package:flutter/material.dart';
 import 'package:grafter/shared/custom_app_bar.dart';
-
 import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:grafter/shared/custom_app_bar.dart';
 import 'package:image_picker/image_picker.dart';
-
 
 class Job extends StatefulWidget {
   const Job({Key? key}) : super(key: key);
@@ -18,7 +14,6 @@ class Job extends StatefulWidget {
 }
 
 class _JobState extends State<Job> {
-
   List<File> images = [];
 
   Future? pickImage(imageSource) async {
@@ -33,7 +28,6 @@ class _JobState extends State<Job> {
       print('Failed to pick image: $e');
     }
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -76,7 +70,6 @@ class _JobState extends State<Job> {
                 )),
               ],
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -94,7 +87,6 @@ class _JobState extends State<Job> {
                     icon: Icon(Icons.note_alt),
                     label: Text(''))
               ],
-
             )
           ],
         ),
