@@ -30,6 +30,14 @@ class AuthService {
     }
   }
 
+  Future signOutUser() async {
+    try {
+      _auth.signOut();
+    } catch (e) {
+      print(e.toString());
+    }
+  }
+
   AppUser? _userFromFirebaseUser(User? user) {
     return user != null ? AppUser(uid: user.uid) : null;
   }
