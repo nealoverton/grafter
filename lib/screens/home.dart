@@ -13,19 +13,53 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: CustomAppBar(),
-      body: Center(
-        child: ElevatedButton(
-          child: const Text('View Job'),
-          onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => const Job()),
-            );
-          },
-        ),
-      ),
+
+    return MaterialApp(
+      home: Scaffold(
+          appBar: CustomAppBar(),
+          body: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Center(
+                child: Column(children: <Widget>[
+              Container(
+                margin: EdgeInsets.all(60),
+                child: FlatButton(
+                  child: Text(
+                    'My Jobs',
+                    style: TextStyle(fontSize: 40.0),
+                  ),
+                  color: Colors.blueAccent,
+                  textColor: Colors.white,
+                  onPressed: () {},
+                ),
+              ),
+              Container(
+                margin: EdgeInsets.all(60),
+                child: FlatButton(
+                  child: Text(
+                    'Sketch',
+                    style: TextStyle(fontSize: 40.0),
+                  ),
+                  color: Colors.blueAccent,
+                  textColor: Colors.white,
+                  onPressed: () {},
+                ),
+              ),
+              Container(
+                margin: EdgeInsets.all(60),
+                child: FlatButton(
+                  child: Text(
+                    'Diary',
+                    style: TextStyle(fontSize: 40.0),
+                  ),
+                  color: Colors.blueAccent,
+                  textColor: Colors.white,
+                  onPressed: () {},
+                ),
+              ),
+            ])),
+          )),
+
     );
   }
 }
