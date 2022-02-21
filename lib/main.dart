@@ -3,8 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:grafter/models/app_user.dart';
 import 'package:grafter/screens/authentication_wrapper.dart';
 import 'package:grafter/screens/home.dart';
-import 'package:grafter/screens/login.dart';
-import 'package:grafter/screens/register.dart';
+import 'package:grafter/screens/logged_in_wrapper.dart';
 import 'package:grafter/services/auth.dart';
 import 'package:provider/provider.dart';
 
@@ -20,15 +19,16 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return StreamBuilder<AppUser?>(
-        stream: AuthService().user,
+    return StreamProvider<AppUser?>(
+        create: (_) => AuthService().user,
+        initialData: null,
         builder: (context, snapshot) {
           return MaterialApp(
             title: 'Grafter',
             theme: ThemeData(
               primarySwatch: Colors.blue,
             ),
-            home: snapshot.hasData ? Home() : Authenticate(),
+            home: LoggedInWrapper(),
           );
         });
   }
