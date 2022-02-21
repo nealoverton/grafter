@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:grafter/models/app_user.dart';
-import 'package:grafter/screens/authentication_wrapper.dart';
+import 'package:grafter/screens/authentication/authentication_wrapper.dart';
 import 'package:grafter/screens/home.dart';
 import 'package:provider/provider.dart';
 
@@ -12,9 +12,9 @@ class LoggedInWrapper extends StatelessWidget {
     final user = Provider.of<AppUser?>(context);
 
     if (user == null) {
-      return Authenticate();
+      return const Authenticate();
     } else {
-      return Home();
+      return const Home();
     }
   }
 }
