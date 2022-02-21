@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:graftr/services/auth.dart';
 
 class LogIn extends StatefulWidget {
-  const LogIn({Key? key}) : super(key: key);
+  final Function toggleAuthScreen;
+  const LogIn({Key? key, required this.toggleAuthScreen}) : super(key: key);
 
   @override
   _LogInState createState() => _LogInState();
@@ -56,7 +57,7 @@ class _LogInState extends State<LogIn> {
                           email, password);
                       if (result == null) {
                         setState(() {
-                          error = 'please provide a valid email';
+                          error = 'email and password not recognised';
                           loading = false;
                         });
                       }
@@ -66,7 +67,11 @@ class _LogInState extends State<LogIn> {
               Text(error, style: TextStyle(color: Colors.red)),
               SizedBox(height: 20.0),
               Text('New around here?'),
-              ElevatedButton(onPressed: () => {}, child: Text('Register')),
+              ElevatedButton(
+                  onPressed: () {
+                    widget.toggleView();
+                  },
+                  child: Text('Register')),
             ],
           ),
         ),

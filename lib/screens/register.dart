@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:graftr/services/auth.dart';
 
 class Register extends StatefulWidget {
-  const Register({Key? key}) : super(key: key);
+  final Function toggleAuthScreen;
+  const Register({Key? key, required this.toggleAuthScreen}) : super(key: key);
 
   @override
   _RegisterState createState() => _RegisterState();
@@ -67,7 +68,11 @@ class _RegisterState extends State<Register> {
               Text(error, style: const TextStyle(color: Colors.red)),
               const SizedBox(height: 20.0),
               const Text('Already have an account? Log in here:'),
-              ElevatedButton(onPressed: () => {}, child: const Text('Log in')),
+              ElevatedButton(
+                  onPressed: () {
+                    widget.toggleAuthScreen();
+                  },
+                  child: const Text('Log in')),
             ],
           ),
         ),
