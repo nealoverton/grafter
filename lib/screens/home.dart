@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:grafter/services/auth.dart';
+import 'package:grafter/shared/custom_app_bar.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -11,11 +12,6 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: TextButton.icon(
-          onPressed: AuthService().signOutUser,
-          icon: const Icon(Icons.person),
-          label: const Text('Logout')),
-    );
+    return Scaffold(appBar: CustomAppBar(), body: Text('Home'));
   }
 }
