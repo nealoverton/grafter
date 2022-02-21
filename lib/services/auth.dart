@@ -1,5 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:graftr/models/app_user.dart';
+import 'package:grafter/models/app_user.dart';
 
 class AuthService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
@@ -18,10 +18,6 @@ class AuthService {
     }
   }
 
-  AppUser? _userFromFirebaseUser(User? user) {
-    return user != null ? AppUser(uid: user.uid) : null;
-  }
-
   Future signInWithEmailAndPassword(String email, String password) async {
     try {
       UserCredential result = await _auth.signInWithEmailAndPassword(
@@ -32,5 +28,13 @@ class AuthService {
       print(e);
       return null;
     }
+  }
+
+  AppUser? _userFromFirebaseUser(User? user) {
+    return user != null ? AppUser(uid: user.uid) : null;
+  }
+
+  Stream<AppUser?> get user {
+    return _auth.authStateChanges().map(_userFromFirebaseUser);
   }
 }
