@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "799368074957",
+    "project_id": "graftr-58009",
+    "storage_bucket": "graftr-58009.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:799368074957:android:180c413cdc2de52ac9bb84",
+        "android_client_info": {
+          "package_name": "com.team_pending.graftr"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "799368074957-dldau7460jkkgbf33ut5r00sc86f154h.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.team_pending.graftr",
+            "certificate_hash": "3c54dd60948524fd4da5d7dbae994ff5299a813a"
+          }
+        },
+        {
+          "client_id": "799368074957-53c82351dtbug6cl11ibcgbl174dk29t.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAgPGAFWzvr3D7c8VYXUJEAnhECYNORoJw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "799368074957-53c82351dtbug6cl11ibcgbl174dk29t.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
