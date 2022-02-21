@@ -1,5 +1,9 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:grafter/shared/custom_app_bar.dart';
+import 'package:image_picker/image_picker.dart';
 
 class Job extends StatefulWidget {
   const Job({Key? key}) : super(key: key);
@@ -9,6 +13,21 @@ class Job extends StatefulWidget {
 }
 
 class _JobState extends State<Job> {
+  List<File> images = [];
+
+  Future? pickImage(imageSource) async {
+    try {
+      final image = await ImagePicker().pickImage(source: imageSource);
+      if (image == null) return;
+      final temporaryImage = File(image.path);
+      setState(() {
+        images.add(temporaryImage);
+      });
+    } on PlatformException catch (e) {
+      print('Failed to pick image: $e');
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -50,6 +69,23 @@ class _JobState extends State<Job> {
                 )),
               ],
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                TextButton.icon(
+                    onPressed: () => pickImage(ImageSource.camera),
+                    icon: Icon(Icons.add_a_photo),
+                    label: Text('')),
+                TextButton.icon(
+                    onPressed: () => pickImage(ImageSource.gallery),
+                    icon: Icon(Icons.photo_size_select_actual),
+                    label: Text('')),
+                TextButton.icon(
+                    onPressed: () => {},
+                    icon: Icon(Icons.note_alt),
+                    label: Text(''))
+              ],
             )
           ],
         ),
