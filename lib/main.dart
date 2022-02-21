@@ -15,12 +15,8 @@ class MainPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Diary'),
-      ),
-      body: DiaryWidget(),
-    );
+      appBar: AppBar(title:Text('Grafter')),
+      body: DiaryWidget()
+      );
   }
 }
-
-
