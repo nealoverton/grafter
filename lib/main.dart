@@ -1,8 +1,11 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import "package:firebase_core/firebase_core.dart";
-import 'package:graftr/services/database.dart';
+import 'package:grafter/models/app_user.dart';
+import 'package:grafter/screens/logged_in_wrapper.dart';
+import 'package:grafter/services/auth.dart';
+import 'package:provider/provider.dart';
 
-Future<void> main() async {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   runApp(const MyApp());
@@ -13,67 +16,17 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: "Flutter Demo",
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
-    );
-  }
-}
-
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({Key? key, required this.title}) : super(key: key);
-
-  final String title;
-
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-  DatabaseService db = DatabaseService();
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
+    return StreamProvider<AppUser?>(
+        create: (_) => AuthService().user,
+        initialData: null,
+        builder: (context, snapshot) {
+          return MaterialApp(
+            title: 'Grafter',
+            theme: ThemeData(
+              primarySwatch: Colors.blue,
             ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headline4,
-            ),
-          ],
-        ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-         // _incrementCounter();
-          // db.getUserData();
-          // db.getJobs();
-          // db.updateUserData("test rname", "test company");
-          // db.getUserData();
-          db.addJob();
-        },
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ),
-    );
+            home: LoggedInWrapper(),
+          );
+        });
   }
 }
