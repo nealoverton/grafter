@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:grafter/screens/diary.dart';
 import 'package:grafter/shared/custom_app_bar.dart';
 import 'dart:io';
-import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:grafter/shared/custom_app_bar.dart';
+import 'package:grafter/shared/fullscreen_image.dart';
 import 'package:image_picker/image_picker.dart';
 
 class Job extends StatefulWidget {
@@ -60,10 +60,21 @@ class _JobState extends State<Job> {
                     itemCount: attachments.length,
                     shrinkWrap: true,
                     itemBuilder: (context, index) {
-                      return Image.file(
-                        attachments[index],
-                        height: 100.0,
-                        width: 100.0,
+                      return GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => FullScreenImage(
+                                      imageFile: attachments[index],
+                                    )),
+                          );
+                        },
+                        child: Image.file(
+                          attachments[index],
+                          height: 100.0,
+                          width: 100.0,
+                        ),
                       );
                     },
                   ),
