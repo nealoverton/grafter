@@ -18,9 +18,9 @@ class JobViewer extends StatefulWidget {
 class _JobViewerState extends State<JobViewer> {
   List<File> attachments = [];
   List<JobMaterial> testMaterials = [
-    JobMaterial(name: 'ball of twine', price: 0.89),
-    JobMaterial(name: 'conical flask', price: 2.50),
-    JobMaterial(name: 'Dead Sea water 1l', price: 3.76),
+    JobMaterial(name: 'ball of twine', price: 0.89, quantity: 1),
+    JobMaterial(name: 'conical flask', price: 2.50, quantity: 3),
+    JobMaterial(name: 'Dead Sea water 1l', price: 3.76, quantity: 7),
   ];
 
   Future? pickImage(imageSource) async {
@@ -45,37 +45,90 @@ class _JobViewerState extends State<JobViewer> {
         jobMaterials: testMaterials,
         attachments: attachments);
 
+    double totalPrice = 0.00;
+    testMaterials.forEach((jobMaterial) {
+      totalPrice += jobMaterial.price * jobMaterial.quantity;
+    });
+
     return Scaffold(
       appBar: CustomAppBar(),
       body: Container(
         alignment: Alignment.center,
         padding: const EdgeInsets.symmetric(vertical: 20.0, horizontal: 50.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
+        child: ListView(
           children: <Widget>[
-            Text(testJob.name),
-            Text(testJob.address),
-            Text(testJob.description),
-            ListView.builder(
-              itemCount: testJob.jobMaterials.length,
-              shrinkWrap: true,
-              itemBuilder: (context, index) {
-                return Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    Text(testJob.jobMaterials[index].name),
-                    Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: <Widget>[
-                          Text('£' +
-                              testJob.jobMaterials[index].price.toString()),
-                          Text(testJob.jobMaterials[index].name),
-                        ])
-                  ],
-                );
-              },
+            SizedBox(
+              height: 20.0,
             ),
-            const Text('Total: X'),
+            Text(
+              testJob.name,
+              textAlign: TextAlign.center,
+            ),
+            SizedBox(
+              height: 20.0,
+            ),
+            Text(
+              testJob.address,
+              textAlign: TextAlign.center,
+            ),
+            SizedBox(
+              height: 20.0,
+            ),
+            Text(
+              testJob.description,
+              textAlign: TextAlign.center,
+            ),
+            SizedBox(
+              height: 20.0,
+            ),
+            Column(
+              children: <Widget>[
+                ...testJob.jobMaterials
+                    .map((jobMaterial) => Column(children: [
+                          SizedBox(
+                            height: 20.0,
+                          ),
+                          Text(jobMaterial.name),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            children: [
+                              Text('£' + jobMaterial.price.toString()),
+                              Text('Quantity: ' +
+                                  jobMaterial.quantity.toString())
+                            ],
+                          )
+                        ]))
+                    .toList()
+              ],
+            ),
+            // ListView.builder(
+            //   itemCount: testJob.jobMaterials.length,
+            //   shrinkWrap: true,
+            //   itemBuilder: (context, index) {
+            //     return Column(
+            //       crossAxisAlignment: CrossAxisAlignment.start,
+            //       children: <Widget>[
+            //         Text(testJob.jobMaterials[index].name),
+            //         Row(
+            //             mainAxisAlignment: MainAxisAlignment.spaceAround,
+            //             children: <Widget>[
+            //               Text('£' +
+            //                   testJob.jobMaterials[index].price.toString()),
+            //               Text(testJob.jobMaterials[index].name),
+            //             ])
+            //       ],
+            //     );
+            //   },
+            // ),
+            SizedBox(
+              height: 20.0,
+            ),
+            Text('Total: £' + totalPrice.toString(),
+                textAlign: TextAlign.center),
+            SizedBox(
+              height: 30.0,
+            ),
+
             Row(
               children: <Widget>[
                 Expanded(
@@ -86,27 +139,34 @@ class _JobViewerState extends State<JobViewer> {
                     itemCount: attachments.length,
                     shrinkWrap: true,
                     itemBuilder: (context, index) {
-                      return GestureDetector(
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => FullScreenImage(
-                                      imageFile: attachments[index],
-                                    )),
-                          );
-                        },
-                        child: Image.file(
-                          attachments[index],
-                          height: 100.0,
-                          width: 100.0,
+                      return Row(children: [
+                        GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => FullScreenImage(
+                                        imageFile: attachments[index],
+                                      )),
+                            );
+                          },
+                          child: Image.file(
+                            attachments[index],
+                            height: 100.0,
+                            width: 100.0,
+                          ),
                         ),
-                      );
+                        SizedBox(
+                          width: 10.0,
+                        )
+                      ]);
                     },
                   ),
                 )),
               ],
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            ),
+            SizedBox(
+              height: 20.0,
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
