@@ -34,6 +34,16 @@ class DatabaseService {
         .add({"estimate": 0, "isLive": false, "jobNotes": "", "title": ""});
   }
 
+  Future deleteJob(jobId) async {
+    // deletes job from user
+   final DocumentReference _jobCollection =
+        await _usersCollection.doc(uid).collection("jobs").doc(jobId);
+
+   FirebaseFirestore.instance.runTransaction((transaction) async => {
+     await transaction.delete(_jobCollection)
+   });
+  }
+
   Future updateUserData(String name, String company) async {
     return await _usersCollection
         .doc(uid)
