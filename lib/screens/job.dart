@@ -14,7 +14,7 @@ class Job extends StatefulWidget {
 }
 
 class _JobState extends State<Job> {
-  List<File> images = [];
+  List<File> attachments = [];
 
   Future? pickImage(imageSource) async {
     try {
@@ -22,7 +22,7 @@ class _JobState extends State<Job> {
       if (image == null) return;
       final temporaryImage = File(image.path);
       setState(() {
-        images.add(temporaryImage);
+        attachments.add(temporaryImage);
       });
     } on PlatformException catch (e) {
       print('Failed to pick image: $e');
@@ -54,14 +54,14 @@ class _JobState extends State<Job> {
               children: <Widget>[
                 Expanded(
                     child: SizedBox(
-                  height: 200.0,
+                  height: 100.0,
                   child: ListView.builder(
                     scrollDirection: Axis.horizontal,
-                    itemCount: 7,
+                    itemCount: attachments.length,
                     shrinkWrap: true,
                     itemBuilder: (context, index) {
-                      return Image.asset(
-                        'images/Icon-192.png',
+                      return Image.file(
+                        attachments[index],
                         height: 100.0,
                         width: 100.0,
                       );
