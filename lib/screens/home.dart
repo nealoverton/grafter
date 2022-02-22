@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:grafter/screens/job.dart';
+import 'package:grafter/screens/diary.dart';
+import 'package:grafter/screens/job_viewer.dart';
 import 'package:grafter/services/auth.dart';
 import 'package:grafter/shared/custom_app_bar.dart';
 
@@ -29,7 +30,13 @@ class _HomeState extends State<Home> {
                   ),
                   color: Colors.blueAccent,
                   textColor: Colors.white,
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const JobViewer()),
+                    );
+                  },
                 ),
               ),
               Container(
@@ -47,14 +54,19 @@ class _HomeState extends State<Home> {
               Container(
                 margin: EdgeInsets.all(60),
                 child: FlatButton(
-                  child: Text(
-                    'Diary',
-                    style: TextStyle(fontSize: 40.0),
-                  ),
-                  color: Colors.blueAccent,
-                  textColor: Colors.white,
-                  onPressed: () {},
-                ),
+                    child: Text(
+                      'Diary',
+                      style: TextStyle(fontSize: 40.0),
+                    ),
+                    color: Colors.blueAccent,
+                    textColor: Colors.white,
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const DiaryWidget()),
+                      );
+                    }),
               ),
             ])),
           )),
