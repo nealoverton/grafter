@@ -16,6 +16,7 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
+          backgroundColor: Theme.of(context).backgroundColor,
           appBar: CustomAppBar(),
           body: Padding(
             padding: const EdgeInsets.all(8.0),
@@ -23,13 +24,13 @@ class _HomeState extends State<Home> {
                 child: Column(children: <Widget>[
               Container(
                 margin: EdgeInsets.all(60),
-                child: FlatButton(
+                child: TextButton(
                   child: Text(
                     'My Jobs',
                     style: TextStyle(fontSize: 40.0),
                   ),
-                  color: Colors.blueAccent,
-                  textColor: Colors.white,
+                  // color: Colors.blueAccent,
+                  // textColor: Colors.white,
                   onPressed: () {
                     Navigator.push(
                       context,
@@ -41,13 +42,13 @@ class _HomeState extends State<Home> {
               ),
               Container(
                 margin: EdgeInsets.all(60),
-                child: FlatButton(
+                child: TextButton(
                   child: Text(
                     'Sketch',
                     style: TextStyle(fontSize: 40.0),
                   ),
-                  color: Colors.blueAccent,
-                  textColor: Colors.white,
+                  // color: Colors.blueAccent,
+                  // textColor: Colors.white,
                   onPressed: () {},
                 ),
               ),
