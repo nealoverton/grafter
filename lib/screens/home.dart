@@ -22,14 +22,9 @@ class _HomeState extends State<Home> {
             child: Center(
                 child: Column(children: <Widget>[
               Container(
-                margin: EdgeInsets.all(60),
-                child: FlatButton(
-                  child: Text(
-                    'My Jobs',
-                    style: TextStyle(fontSize: 40.0),
-                  ),
-                  color: Colors.blueAccent,
-                  textColor: Colors.white,
+                margin: const EdgeInsets.all(60),
+                color: Colors.blueAccent,
+                child: TextButton(
                   onPressed: () {
                     Navigator.push(
                       context,
@@ -37,36 +32,40 @@ class _HomeState extends State<Home> {
                           builder: (context) => const JobViewer()),
                     );
                   },
-                ),
-              ),
-              Container(
-                margin: EdgeInsets.all(60),
-                child: FlatButton(
-                  child: Text(
-                    'Sketch',
-                    style: TextStyle(fontSize: 40.0),
+                  style: TextButton.styleFrom(
+                    primary: Colors.white,
                   ),
-                  color: Colors.blueAccent,
-                  textColor: Colors.white,
-                  onPressed: () {},
+                  child: const Text('My Jobs', style: TextStyle(fontSize: 40)),
                 ),
               ),
               Container(
-                margin: EdgeInsets.all(60),
-                child: FlatButton(
-                    child: Text(
-                      'Diary',
-                      style: TextStyle(fontSize: 40.0),
-                    ),
-                    color: Colors.blueAccent,
-                    textColor: Colors.white,
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const DiaryWidget()),
-                      );
-                    }),
+                margin: const EdgeInsets.all(60),
+                color: Colors.blueAccent,
+                child: TextButton(
+                  onPressed: () {},
+                  style: TextButton.styleFrom(
+                    primary: Colors.white,
+                  ),
+                  child:
+                      const Text('Sketchpad', style: TextStyle(fontSize: 40)),
+                ),
+              ),
+              Container(
+                margin: const EdgeInsets.all(60),
+                color: Colors.blueAccent,
+                child: TextButton(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const DiaryWidget()),
+                    );
+                  },
+                  style: TextButton.styleFrom(
+                    primary: Colors.white,
+                  ),
+                  child: const Text('My Diary', style: TextStyle(fontSize: 40)),
+                ),
               ),
             ])),
           )),
