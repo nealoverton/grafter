@@ -11,10 +11,12 @@ class Calendar extends StatefulWidget {
 }
 
 class _CalendarState extends State<Calendar> {
-  Map<DateTime, List<Event>> ?selectedEvents;
+  Map<DateTime, List<Event>>? selectedEvents;
   CalendarFormat format = CalendarFormat.month;
   DateTime selectedDay = DateTime.now();
   DateTime focusedDay = DateTime.now();
+
+  TextEditingController _eventController = TextEditingController();
 
   @override
   void initState() {
@@ -24,6 +26,12 @@ class _CalendarState extends State<Calendar> {
 
   List<Event> _getEventsfromDay(DateTime date) {
     return selectedEvents![date] ?? [];
+  }
+
+  @override
+  void dispose() {
+    _eventController.dispose();
+    super.dispose();
   }
 
   @override
@@ -76,7 +84,32 @@ class _CalendarState extends State<Calendar> {
           ),
         ),
       ),
-      floatingActionButton: FloatingActionButton.extended(onPressed: () {}, label: Text('Add Event')),
+      floatingActionButton: FloatingActionButton.extended(
+        onPressed: () => showDialog(
+            context: context,
+            builder: (context) => AlertDialog(
+                  title: Text('Add a Job'),
+                  content: TextFormField(
+                    controller: _eventController,
+                  ),
+                  actions: [
+                    TextButton(
+                      child: Text('Cancel'),
+                      onPressed: () => Navigator.pop(context),
+                    ),
+                    TextButton(
+                      child: Text('Ok'),
+                      onPressed: () {
+                        if (_eventController.text.isEmpty) {
+                          return;
+                        }
+                      },
+                    ),
+                  ],
+                )),
+        label: Text('Add Job'),
+        icon: Icon(Icons.add),
+      ),
     );
   }
 }
