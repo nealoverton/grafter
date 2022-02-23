@@ -17,11 +17,11 @@ class DatabaseService {
     return snap.data();
   }
 
-    Future createUser(newUserUid) async {
+    Future createUser() async {
 
     // temp values in set until fields added to registration
     return await _usersCollection
-        .doc(newUserUid)
+        .doc(uid)
         .set({"name": "name", "company": "company"});
   }
 
@@ -57,9 +57,5 @@ class DatabaseService {
         (transaction) async => {transaction.delete(_jobCollection)});
   }
 
-  Future testFunc() async {
-    User user = FirebaseAuth.instance.currentUser!;
-    String? uid = user.uid;
-    print(uid);
-  }
+
 }
