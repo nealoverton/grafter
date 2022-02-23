@@ -10,7 +10,7 @@ class Authenticate extends StatefulWidget {
 }
 
 class _AuthenticateState extends State<Authenticate> {
-  bool newUser = true;
+  bool newUser = false;
 
   void toggleAuthScreen() {
     setState(() {

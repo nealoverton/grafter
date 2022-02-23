@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:grafter/models/app_user.dart';
+import 'package:grafter/models/job.dart';
 
 import 'package:grafter/screens/diary.dart';
 import 'package:grafter/screens/job_viewer.dart';
 import 'package:grafter/services/auth.dart';
+import 'package:grafter/services/database.dart';
 import 'package:grafter/shared/custom_app_bar.dart';
+import 'package:provider/provider.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -15,8 +19,11 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
+    final user = Provider.of<AppUser?>(context);
+    return StreamProvider<List<Job>?>(
+      create: (_) => DatabaseService().jobs,
+      initialData: null,
+      child: Scaffold(
           backgroundColor: Theme.of(context).backgroundColor,
           appBar: CustomAppBar(),
           body: Padding(

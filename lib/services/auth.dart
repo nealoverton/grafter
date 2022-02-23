@@ -11,8 +11,8 @@ class AuthService {
           email: email.trim(), password: password.trim());
 
       User? user = result.user;
-      await DatabaseService()
-          .createUser(); // temp values set in db file
+      await DatabaseService().createUser(); // temp values set in db file
+      await DatabaseService().addJob();
       return _userFromFirebaseUser(user);
     } catch (e) {
       print(e);
