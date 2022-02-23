@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:grafter/models/app_user.dart';
+import "package:grafter/services/database.dart";
 
 class AuthService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
@@ -10,7 +11,8 @@ class AuthService {
           email: email.trim(), password: password.trim());
 
       User? user = result.user;
-
+      await DatabaseService()
+          .createUser(user!.uid); // temp values set in db file
       return _userFromFirebaseUser(user);
     } catch (e) {
       print(e);
@@ -23,6 +25,7 @@ class AuthService {
       UserCredential result = await _auth.signInWithEmailAndPassword(
           email: email.trim(), password: password.trim());
       User? user = result.user;
+
       return _userFromFirebaseUser(user);
     } catch (e) {
       print(e);
