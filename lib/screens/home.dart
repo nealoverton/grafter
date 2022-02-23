@@ -16,6 +16,7 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
+          backgroundColor: Theme.of(context).backgroundColor,
           appBar: CustomAppBar(),
           body: Padding(
             padding: const EdgeInsets.all(8.0),
