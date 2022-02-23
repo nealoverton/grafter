@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import 'package:grafter/screens/diary.dart';
 import 'package:grafter/screens/job_viewer.dart';
 import 'package:grafter/services/auth.dart';
@@ -19,7 +20,7 @@ class _HomeState extends State<Home> {
           backgroundColor: Theme.of(context).backgroundColor,
           appBar: CustomAppBar(),
           body: Padding(
-            padding: const EdgeInsets.all(8.1),
+            padding: const EdgeInsets.all(8),
             child: Center(
                 child: Column(children: <Widget>[
               Container(
@@ -58,8 +59,7 @@ class _HomeState extends State<Home> {
                   onPressed: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(
-                          builder: (context) => const DiaryWidget()),
+                      MaterialPageRoute(builder: (context) => Calendar()),
                     );
                   },
                   style: TextButton.styleFrom(
