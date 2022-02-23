@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:grafter/models/app_user.dart';
 import 'package:grafter/screens/logged_in_wrapper.dart';
 import 'package:grafter/services/auth.dart';
+import 'package:grafter/shared/theme.dart';
 import 'package:provider/provider.dart';
 
 void main() async {
@@ -22,9 +23,7 @@ class MyApp extends StatelessWidget {
         builder: (context, snapshot) {
           return MaterialApp(
             title: 'Grafter',
-            theme: ThemeData(
-              primarySwatch: Colors.blue,
-            ),
+            theme: CustomTheme.grafterTheme,
             home: LoggedInWrapper(),
           );
         });
