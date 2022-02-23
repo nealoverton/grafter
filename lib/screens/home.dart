@@ -19,7 +19,7 @@ class _HomeState extends State<Home> {
           backgroundColor: Theme.of(context).backgroundColor,
           appBar: CustomAppBar(),
           body: Padding(
-            padding: const EdgeInsets.all(8.0),
+            padding: const EdgeInsets.all(8.1),
             child: Center(
                 child: Column(children: <Widget>[
               Container(
