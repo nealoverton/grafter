@@ -11,8 +11,8 @@ class AuthService {
           email: email.trim(), password: password.trim());
 
       User? user = result.user;
-      await DatabaseService(uid: user!.uid)
-          .updateUserData("name", "company"); // temp values
+      await DatabaseService()
+          .createUser(user!.uid); // temp values set in db file
       return _userFromFirebaseUser(user);
     } catch (e) {
       print(e);
@@ -26,8 +26,6 @@ class AuthService {
           email: email.trim(), password: password.trim());
       User? user = result.user;
 
-      // to set DB instance of signed in user
-      DatabaseService(uid: user!.uid);
       return _userFromFirebaseUser(user);
     } catch (e) {
       print(e);
