@@ -12,7 +12,7 @@ class AuthService {
 
       User? user = result.user;
       await DatabaseService()
-          .createUser(user!.uid); // temp values set in db file
+          .createUser(); // temp values set in db file
       return _userFromFirebaseUser(user);
     } catch (e) {
       print(e);
