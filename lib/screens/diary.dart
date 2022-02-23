@@ -1,17 +1,30 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/material.dart';
+import 'package:grafter/screens/event.dart';
 import 'package:grafter/shared/custom_app_bar.dart';
 import 'package:table_calendar/table_calendar.dart';
 
 class Calendar extends StatefulWidget {
+  const Calendar({Key? key}) : super(key: key);
+
   @override
   _CalendarState createState() => _CalendarState();
 }
 
 class _CalendarState extends State<Calendar> {
+  Map<DateTime, List<Event>> ?selectedEvents;
   CalendarFormat format = CalendarFormat.month;
   DateTime selectedDay = DateTime.now();
   DateTime focusedDay = DateTime.now();
+
+  @override
+  void initState() {
+    selectedEvents = {};
+    super.initState();
+  }
+
+  List<Event> _getEventsfromDay(DateTime date) {
+    return selectedEvents![date] ?? [];
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -41,19 +54,29 @@ class _CalendarState extends State<Calendar> {
           return isSameDay(selectedDay, date);
         },
 
+        eventLoader: _getEventsfromDay,
+
         //To Style the Calendar
-        calendarStyle: CalendarStyle(
-            isTodayHighlighted: true,
-            selectedDecoration: BoxDecoration(
-              color: Colors.grey,
-              shape: BoxShape.circle,
-            ),
-            selectedTextStyle: TextStyle(color: Colors.white),
-            todayDecoration: BoxDecoration(
-              color: Colors.orange,
-              shape: BoxShape.circle,
-            )),
+        calendarStyle: const CalendarStyle(
+          isTodayHighlighted: true,
+          selectedDecoration: BoxDecoration(
+            color: Colors.grey,
+            shape: BoxShape.circle,
+          ),
+          selectedTextStyle: TextStyle(color: Colors.white),
+          todayDecoration: BoxDecoration(
+            color: Colors.orange,
+            shape: BoxShape.circle,
+          ),
+          defaultDecoration: BoxDecoration(
+            shape: BoxShape.circle,
+          ),
+          weekendDecoration: BoxDecoration(
+            shape: BoxShape.circle,
+          ),
+        ),
       ),
+      floatingActionButton: FloatingActionButton.extended(onPressed: () {}, label: Text('Add Event')),
     );
   }
 }
